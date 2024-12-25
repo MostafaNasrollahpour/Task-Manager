@@ -7,11 +7,6 @@ const validateEmail = (email) => {
         );
 };
 
-
-// document.getElementById('myForm').addEventListener('submit', function (e) {
-//     e.preventDefault();
-// });
-
 function check_inputs() {
     const inputs = document.querySelectorAll('.in');
     let allValid = true;
@@ -42,7 +37,5 @@ function check_inputs() {
         alert("Invalid Email.")
         return false
     }
-
-
-    // window.location.href = "firstPage.html";
+    
 }
