@@ -1,0 +1,29 @@
+body {
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.element {
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: monospace;
+}
+
+.element:hover {
+    transform: scale(1.2);
+}
+
+.for-card {
+    background-color: rgba(219, 218, 212, 255);
+    font-family: cursive;
+    border-color: rgb(29, 30, 70);
+    border-width: 3px;
+}
