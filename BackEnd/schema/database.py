@@ -12,7 +12,7 @@ def insert(values: tuple):
         )
 
         # Prepare the query
-        query = "INSERT INTO users (full_name, skills, work_history, pass) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO users (full_name, skills, work_history, pass, is_admin) VALUES (%s, %s, %s, %s, %s)"
 
         # Create cursor and execute query
         cursor = connection.cursor()
