@@ -17,7 +17,7 @@ async def user_signin(user: UserSignIn):
     
     if not insert(data):
         return {
-            'detail': 'fase'
+            'detail': 'false'
         }
 
     return {

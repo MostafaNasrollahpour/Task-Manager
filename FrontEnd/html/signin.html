@@ -14,25 +14,24 @@
     <div class="container">
         <div class="col-12 col-md-12 d-flex justify-content-center" style="margin-top: 3rem;">
             <div class="card h-100 for-card">
-                <form class="card-body d-flex flex-column" action="home.html"
-                    onsubmit="return check_inputs(event)">
+                <form id="sign_in_form" class="card-body d-flex flex-column">
                     <label for="name" class="form-label">Name:
-                        <input type="text" id="name" class="form-control mx-auto in">
+                        <input type="text" id="name" class="form-control mx-auto in" placeholder="enter name">
                     </label>
                     <label for="email" class="form-label">Email:
-                        <input type="text" id="email" class="form-control mx-auto in">
+                        <input type="email" id="email" class="form-control mx-auto in" placeholder="enter email">
                     </label>
                     <label for="skills" class="form-label">Skills:
-                        <input type="text" id="skills" class="form-control larger-box mx-auto in">
+                        <input type="text" id="skills" class="form-control larger-box mx-auto in" placeholder="enter skills">
                     </label>
                     <label for="history" class="form-label ">Work History:
-                        <input type="text" id="history" class="form-control larger-box mx-auto in">
+                        <input type="text" id="history" class="form-control larger-box mx-auto in" placeholder="enter work history">
                     </label>
                     <label for="pass" class="form-label">Password:
-                        <input type="password" id="pass" class="form-control mx-auto in">
+                        <input type="password" id="pass" class="form-control mx-auto in" minlength="8" placeholder="enter password">
                     </label>
                     <label for="re-pass" class="form-label">Repeat Password:
-                        <input type="password" id="re-pass" class="form-control mx-auto in">
+                        <input type="password" id="re-pass" class="form-control mx-auto in" placeholder="repeat password">
                     </label>
                     <button type="submit" class="mt-3">Sign in</button>
                 </form>

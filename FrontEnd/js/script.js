@@ -1,13 +1,4 @@
-
-const validateEmail = (email) => {
-    return String(email)
-        .toLowerCase()
-        .match(
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-};
-
-function check_inputs() {
+function checkInputs() {
     const inputs = document.querySelectorAll('.in');
     let allValid = true;
 
@@ -25,17 +16,30 @@ function check_inputs() {
         return false;
     }
 
-    const pass = document.getElementById('for-pass').value;
-    const rePass = document.getElementById('for-re-pass').value;
+    const pass = document.getElementById('pass').value;
+    const rePass = document.getElementById('re-pass').value;
     if (pass !== rePass) {
         alert("Passwords do not match");
         return false;
     }
 
-    const email = document.getElementById('for-email').value
-    if (!validateEmail(email)) {
-        alert("Invalid Email.")
-        return false
-    }
-    
+    return true;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script is running');//just to check
+    
+    document.getElementById('sign_in_form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (checkInputs()) {
+            const formData = {
+                user_name : document.getElementById('name').value,
+                user_email : document.getElementById('email').value,
+                user_skills : document.getElementById('skills').value,
+                user_history : document.getElementById('history').value,
+                user_password : document.getElementById('pass').value
+            }
+            console.log(JSON.stringify(formData));// here you can write your code
+        }
+    });
+});
