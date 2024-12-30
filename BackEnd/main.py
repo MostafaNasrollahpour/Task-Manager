@@ -8,10 +8,18 @@ app = FastAPI()
 async def user_signin(user: UserSignIn):
     data = (
         user.name,
+        user.email,
         user.skills,
         user.work_history,
         user.password,
         user.is_admin
     )
-    insert(data)
-    return user
+    
+    if not insert(data):
+        return {
+            'detail': 'fase'
+        }
+
+    return {
+        'detail': 'true'
+    }
