@@ -12,7 +12,7 @@ def insert(values: tuple):
         )
 
         # Prepare the query
-        query = "INSERT INTO users (full_name, skills, work_history, pass, is_admin) VALUES (%s, %s, %s, %s, %s)"
+        query = "INSERT INTO users (name, email, skills, work_history, password, is_admin) VALUES (%s, %s, %s, %s, %s, %s)"
 
         # Create cursor and execute query
         cursor = connection.cursor()
@@ -26,13 +26,14 @@ def insert(values: tuple):
         # print(f"{affected_rows} row(s) inserted successfully.")
 
     except mysql.connector.Error as error:
-        print(f"Error: {error}")
-
+        # print(f"Error: {error}")
+        return False
     finally:
         if connection.is_connected():
             cursor.close()
             connection.close()
             # print("MySQL connection is closed")
+            return True
 
 
 def run_query(query):
@@ -53,13 +54,12 @@ def run_query(query):
         # Fetch all rows
         rows = cursor.fetchall()
         
-        # Print each row
-        for row in rows:
-            print(row)
-        
         # Close cursor and connection
         cursor.close()
         conn.close()
         
+        return rows
+        
     except mysql.connector.Error as error:
         print(f"Error: {error}")
+        return [False]
