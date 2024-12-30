@@ -1,6 +1,10 @@
 import mysql.connector
 
 
+def exist_user(email: str):
+    pass
+
+
 def insert(values: tuple):
     try:
         # Establish connection

@@ -1,12 +1,19 @@
+# import section about library
 from fastapi import FastAPI
-from models.models import *
-from schema.database import *
+
+
+# import section about my defind
+from schemas.users import UserSignIn
+
+
 
 app = FastAPI()
 
+
+
 @app.post('/signin')
 async def user_signin(user: UserSignIn):
-    data = (
+    values: tuple = (
         user.name,
         user.email,
         user.skills,
@@ -14,12 +21,4 @@ async def user_signin(user: UserSignIn):
         user.password,
         user.is_admin
     )
-    
-    if not insert(data):
-        return {
-            'detail': 'false'
-        }
-
-    return {
-        'detail': 'true'
-    }
+    result = exist_user(user.email)
