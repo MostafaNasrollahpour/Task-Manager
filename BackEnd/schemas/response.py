@@ -11,3 +11,13 @@ UnExpected = {
     'is_succes': 'false', 
     'detail': 'unexpected error happend'
 }
+
+NotEmailExist = {
+    'is_succes': 'false',
+    'detail': 'email does not exist'
+}
+
+IncorrectPassword = {
+    'is_succes': 'false',
+    'detail': 'password is incorrect'
+}
