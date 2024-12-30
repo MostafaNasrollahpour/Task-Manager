@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+
+
 class UserSignIn(BaseModel):
     name: str
     email: str
@@ -8,3 +10,7 @@ class UserSignIn(BaseModel):
     password: str
     is_admin: bool = False
 
+
+class UserSignUp(BaseModel):
+    email: str
+    password: str
