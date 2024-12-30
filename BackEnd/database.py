@@ -67,3 +67,10 @@ def insert(values: tuple):
             connection.close()
             # print("MySQL connection is closed")
             return True
+
+
+def password_checker(email: str, password: str):
+    result = run_query("SELECT password FROM users WHERE email = %s", (email,))[0]
+    if result['password'] == password:
+        return True
+    return False
