@@ -4,6 +4,8 @@ from fastapi import FastAPI
 
 # import section about my defind
 from schemas.users import UserSignIn
+from schemas.response import *
+from database import *
 
 
 
@@ -22,3 +24,9 @@ async def user_signin(user: UserSignIn):
         user.is_admin
     )
     result = exist_user(user.email)
+    if result:
+        return EmailExist
+    result = insert(values)
+    if result:
+        return OK
+    return UnExpected
