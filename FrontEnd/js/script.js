@@ -27,19 +27,19 @@ function checkInputs() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');//just to check
+    console.log('Script is running');
     
-    document.getElementById('sign_in_form').addEventListener('submit', function(e) {
+    document.getElementById('sign_in_form').addEventListener('submit', async function(e) {
         e.preventDefault();
+        
         if (checkInputs()) {
             const formData = {
-                user_name : document.getElementById('name').value,
-                user_email : document.getElementById('email').value,
-                user_skills : document.getElementById('skills').value,
-                user_history : document.getElementById('history').value,
-                user_password : document.getElementById('pass').value
-            }
-            console.log(JSON.stringify(formData));// here you can write your code
+                username: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                skills: document.getElementById('skills').value,
+                history: document.getElementById('history').value,
+                password: document.getElementById('pass').value
+            };
         }
     });
 });
