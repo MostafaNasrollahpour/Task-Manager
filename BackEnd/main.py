@@ -36,6 +36,10 @@ async def home_page():
 
 @app.post('/signin')
 async def user_signin(user: UserSignIn):
+    result = exist_user(user.email)
+    if result:
+        return EmailExist
+    
     values: tuple = (
         user.name,
         user.email,
@@ -44,10 +48,8 @@ async def user_signin(user: UserSignIn):
         user.password,
         user.is_admin
     )
-    result = exist_user(user.email)
-    if result:
-        return EmailExist
-    result = insert(values)
+    
+    result = insert_users(values)
     if result:
         return OK
     return UnExpected
@@ -64,3 +66,24 @@ async def user_signup(user: UserSignUp):
     return IncorrectPassword
 
 
+@app.post('/create-project')
+async def create_project(project: ProjectCreated):
+    exist = exist_project(name=project.name, manager=project.manager, worker=project.worker)
+    if exist:
+        return ProjectExist
+    
+    values: tuple = (
+        project.name,
+        project.start_date,
+        project.manager, 
+        project.end_date,
+        project.description,
+        project.status,
+        project.worker, 
+        project.priority
+    )
+    
+    result = insert_projects(values)
+    if result:
+        return OK
+    return UnExpected
