@@ -21,3 +21,8 @@ IncorrectPassword = {
     'is_succes': 'false',
     'detail': 'password is incorrect'
 }
+
+ProjectExist = {
+    'is_succes': 'false',
+    'detail': 'project already exist'
+}
