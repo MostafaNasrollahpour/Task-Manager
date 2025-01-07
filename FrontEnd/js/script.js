@@ -26,7 +26,7 @@ function checkInputs() {
     return true;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function load(){
     console.log('Script is running');
     
     document.getElementById('sign_in_form').addEventListener('submit', async function(e) {
@@ -42,4 +42,9 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
     });
-});
+    
+}
+
+document.addEventListener('DOMContentLoaded', load);
+
+
