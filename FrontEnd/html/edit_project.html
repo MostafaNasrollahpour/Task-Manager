@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/home_styles.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-12 col-md-12 my-4">
+                <div>
+                    <form id="create-project-form">
+                        <div class="card h-100 for-card" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Project name :</p>
+                                    <p id="demo-name" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_project_name.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Start date :</p>
+                                    <p id="demo-start-date" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_start_date.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">End date :</p>
+                                    <p id="demo-end-date" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_end_date.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Description :</p>
+                                    <p id="demo-description" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button id="name-btn" type="button" class="btn btn-warning" onclick="window.location.replace('edit_description.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Project manager :</p>
+                                    <p id="demo-manager" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_manager.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Project receiver :</p>
+                                    <p id="demo-receiver" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_receiver.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card h-100 for-card mt-3" style="border: none;">
+                            <div class="inner-card">
+                                <div class="d-flex">
+                                    <p class="for-admin" style="font-size: large;">Priority :</p>
+                                    <p id="demo-priority" class="for-admin"></p>
+                                </div>
+                                <div class="d-flex justify-content-end remove-btn">
+                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_priority.html')">Edit</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/edit_project.js"></script>
+</body>
+
+</html>

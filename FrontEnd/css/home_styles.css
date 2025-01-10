@@ -27,3 +27,33 @@ a {
     border-color: rgb(29, 30, 70);
     border-width: 3px;
 }
+.for-button:hover{
+    background-color: green;
+}
+.for_text{
+    width: 50%;
+    height: 50px;
+    font-family:cursive;
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:50px;
+}
+.sub:hover{
+    color: green;
+}
+.remove-btn{
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.for-admin{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.inner-card{
+    margin: 15px 15px 15px 15px; 
+    background-color: white;
+    border-radius: 5px;
+}

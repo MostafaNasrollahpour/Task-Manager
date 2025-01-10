@@ -16,31 +16,28 @@ function checkInputs() {
         return false;
     }
 
-    const pass = document.getElementById('pass').value;
-    const rePass = document.getElementById('re-pass').value;
-    if (pass !== rePass) {
-        alert("Passwords do not match");
-        return false;
-    }
-
     return true;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Script is running');
     
-    document.getElementById('sign_in_form').addEventListener('submit', async function(e) {
+    document.getElementById('create-project-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         if (checkInputs()) {
+            document.getElementById('submit_btn').style.display = 'none'
             const formData = {
-                username: document.getElementById('name').value,
-                email: document.getElementById('email').value.toLowerCase(),
-                skills: document.getElementById('skills').value,
-                history: document.getElementById('history').value,
-                password: document.getElementById('pass').value
+                project_name: document.getElementById('project_name').value,
+                start_date: document.getElementById('start_date').value,
+                end_date: document.getElementById('end_date').value,
+                description: document.getElementById('description').value,
+                manager: document.getElementById('manager').value.toLowerCase(),
+                receiver: document.getElementById('receiver').value.toLowerCase(),
+                priority: document.getElementById('priority').value
             };
             console.log(JSON.stringify(formData))
+            
         }
 
     });

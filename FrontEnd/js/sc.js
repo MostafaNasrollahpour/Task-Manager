@@ -18,49 +18,17 @@ function checkInputs() {
     return true;
 }
 
-async function sendData(data) {
-    try {
-        const response = await fetch('http://127.0.0.1:8000/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log('Success:', result);
-        return result;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
+    console.log('Script is running'); // just to check
     
-    document.getElementById('sign_up_form').addEventListener('submit', async function(e) {
+    document.getElementById('sign_up_form').addEventListener('submit', function(e) {
         e.preventDefault();
         if (checkInputs()) {
             const formData = {
-                email: document.getElementById('email').value,
-                password: document.getElementById('pass').value,
-            };
-            
-            console.log(JSON.stringify(formData));
-
-            try {
-                const result = await sendData(formData);
-                console.log(result);
-            } catch (error) {
-                console.error('Error:', error);
+                user_email : document.getElementById('email').value,
+                user_password : document.getElementById('pass').value,
             }
+            console.log(JSON.stringify(formData));// here toy can write your code 
         }
     });
 });
-

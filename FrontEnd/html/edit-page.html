@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project</title>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Project Information</h2>
+        <form id="editForm">
+            <div class="mb-3">
+                <label for="project_name" class="form-label">Project name:</label>
+                <input type="text" id="project_name" name="project_name" value="" required>
+            </div>
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start date:</label>
+                <input type="date" id="start_date" name="start_date" value="" required>
+            </div>
+            <!-- Similar input fields for other properties -->
+        </form>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Retrieve URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        Object.keys(projectInfo).forEach(key => {
+            document.getElementById(key).value = urlParams.get(key);
+        });
+
+        // Make form fields editable after redirection
+        setTimeout(function() {
+            document.querySelectorAll('input').forEach(input => {
+                input.removeAttribute('readonly');
+            });
+        }, 1000); // Wait for page load
+
+        // Form submission handler
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log('Submitted values:', {
+                project_name: document.getElementById('project_name').value,
+                start_date: document.getElementById('start_date').value,
+                // ... other fields
+            });
+            // Here you would typically submit the form data to your server
+        });
+
+        // Update original page with edited values
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const updatedInfo = {};
+            Object.keys(projectInfo).forEach(key => {
+                updatedInfo[key] = document.getElementById(key).value;
+            });
+            window.parent.document.getElementById(`demo-${Object.keys(updatedInfo)[0]}`).innerHTML = updatedInfo[Object.keys(updatedInfo)[0]];
+            window.close();
+        });
+    </script>
+</body>
+</html>
