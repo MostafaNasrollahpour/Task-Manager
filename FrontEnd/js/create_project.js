@@ -20,7 +20,6 @@ function checkInputs() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
     
     document.getElementById('create-project-form').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 worker: document.getElementById('receiver').value.toLowerCase(),
                 priority: document.getElementById('priority').value
             };
-            console.log(JSON.stringify(formData))
+            
             async function sendData(data) {
                 try {
                     const response = await fetch('http://127.0.0.1:8000/create-project', {
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
             
                     const result = await response.json();
-                    console.log('Success:', result);
                     return result;
                 } catch (error) {
                     console.error('Error:', error);

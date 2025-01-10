@@ -63,5 +63,5 @@ document.addEventListener('DOMContentLoaded', function() {
         card.querySelector('form')?.addEventListener('submit', handleSubmit);
     });
 
-   
+
 });
