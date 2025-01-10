@@ -41,6 +41,10 @@ async function sendData(data) {
     }
 }
 
+function save_current(email){
+    localStorage.setItem('currentUser', email);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('sign_up_form').addEventListener('submit', async function(e) {
@@ -56,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const result = await sendData(formData);
                 if(result.is_succes == 'true'){
+                    save_current(formData.email);
                     if(result.is_admin == 'true'){
                         window.location.replace('admin_home.html')
                     }else{
