@@ -54,8 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 email: document.getElementById('email').value.toLowerCase(),
                 password: document.getElementById('pass').value,
             };
-            
-            console.log(JSON.stringify(formData));
 
             try {
                 const result = await sendData(formData);
