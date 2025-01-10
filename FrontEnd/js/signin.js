@@ -26,8 +26,12 @@ function checkInputs() {
     return true;
 }
 
-function save_current(email){
-    localStorage.setItem('currentUser', email);
+function save_current(userEmail){
+    const currentUser = {
+        email: userEmail
+    }
+    let value = JSON.stringify(currentUser);
+    localStorage.setItem("currentUser", value);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
