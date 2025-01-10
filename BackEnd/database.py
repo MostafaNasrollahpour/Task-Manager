@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 import mysql.connector
 
 
@@ -110,3 +111,11 @@ def insert_projects(values: tuple):
             connection.close()
             # print("MySQL connection is closed")
             return True
+
+
+def check_admin(email: str):
+    result = run_query('select is_admin from users where email = %s', (email,))[0]
+    if result['is_admin']:
+        return 'true'
+    return 'false'
+

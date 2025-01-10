@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # import section about my defind
-from schemas.users import UserSignIn, UserSignUp
+from schemas.users import UserSignIn, UserSignUp, CurrentUser
 from schemas.projects import ProjectCreated
 from schemas.response import *
 from database import *
@@ -61,7 +61,11 @@ async def user_signup(user: UserSignUp):
         return NotEmailExist
     is_password = password_checker(user.email, user.password)
     if is_password:
-        return OK
+        is_admin = check_admin(user.email)
+        return {
+            'is_succes': 'true',
+            'is_admin': is_admin
+        }
     return IncorrectPassword
 
 
