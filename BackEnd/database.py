@@ -138,6 +138,6 @@ def get_project_from_db(email: str):
 
 def get_users_from_db(is_admin = 0):
     result = run_query('select name, email from users where is_admin = %s', (bool(is_admin),))
-    print(result)
+    return result
 
 
