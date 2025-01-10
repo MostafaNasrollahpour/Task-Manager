@@ -67,8 +67,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             try {
                 const result = await sendData(formData);
-                console.log(result); 
-                // here you can write your code
+                if(result.is_succes == 'true'){
+                    if(result.is_admin == 'true'){
+                        window.location.replace('admin_home.html')
+                    }else{
+                        window.location.replace('home.html')
+                    }
+                }else{
+                    alert(result.detail)
+                }
             } catch (error) {
                 console.error('Error:', error);
             }

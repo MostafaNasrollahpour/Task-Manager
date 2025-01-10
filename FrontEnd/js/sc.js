@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         if (checkInputs()) {
             const formData = {
-                email: document.getElementById('email').value,
+                email: document.getElementById('email').value.toLowerCase(),
                 password: document.getElementById('pass').value,
             };
             
@@ -55,7 +55,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
             try {
                 const result = await sendData(formData);
-                console.log(result);
+                if(result.is_succes == 'true'){
+                    if(result.is_admin == 'true'){
+                        window.location.replace('admin_home.html')
+                    }else{
+                        window.location.replace('home.html')
+                    }
+                }else{
+                    alert(result.detail)
+                }
             } catch (error) {
                 console.error('Error:', error);
             }

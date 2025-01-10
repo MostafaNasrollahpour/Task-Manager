@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (checkInputs()) {
             document.getElementById('submit_btn').style.display = 'none'
             const formData = {
-                name: document.getElementById('project_name').value,
+                name: document.getElementById('project_name').value.toLowerCase(),
                 start_date: document.getElementById('start_date').value,
                 manager: document.getElementById('manager').value.toLowerCase(),
                 end_date: document.getElementById('end_date').value,
