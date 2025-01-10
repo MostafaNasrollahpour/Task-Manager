@@ -147,5 +147,8 @@ def get_sub_projects_from_db(email: str):
     return manager_projects
 
 
-
+def get_my_projects_from_db(email: str):
+    worker_projects = run_query('SELECT * FROM projects WHERE worker = %s', (email,))
+    
+    return worker_projects
 
