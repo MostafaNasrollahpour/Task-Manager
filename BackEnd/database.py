@@ -119,3 +119,18 @@ def check_admin(email: str):
         return 'true'
     return 'false'
 
+
+def get_project_from_db(email: str):
+    try:
+        # Query for projects where the user is a worker
+        worker_projects = run_query('SELECT * FROM projects WHERE worker = %s', (email,))
+        
+        # Query for projects where the user is a manager
+        manager_projects = run_query('SELECT * FROM projects WHERE manager = %s', (email,))
+        
+        # Combine the results
+        projects = worker_projects + manager_projects
+        
+        return projects
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

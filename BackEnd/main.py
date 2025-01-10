@@ -90,3 +90,11 @@ async def create_project(project: ProjectCreated):
     if result:
         return OK
     return UnExpected
+
+
+@app.post('/get-project')
+async def get_project(user: CurrentUser):
+    projects = get_project_from_db(user.email)
+    return {
+        'projects': projects
+    }
