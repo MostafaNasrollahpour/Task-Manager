@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if(result.is_admin == 'true'){
                         window.location.replace('admin_home.html')
                     }else{
-                        window.location.replace('home.html')
+                        window.location.replace('user_home.html')
                     }
                 }else{
                     alert(result.detail)
