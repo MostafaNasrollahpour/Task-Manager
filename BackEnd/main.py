@@ -108,3 +108,9 @@ async def get_users():
     }
 
 
+@app.post('/get-my-users-projects')
+async def get_my_users_projects(user: CurrentUser):
+    projects = get_sub_projects_from_db(user.email)
+    return {
+        'projects': projects
+    }
