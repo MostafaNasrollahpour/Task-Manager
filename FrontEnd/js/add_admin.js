@@ -14,9 +14,10 @@ async function fetchData() {
 async function useFetchedData() {
     const data = await fetchData(); 
 
-    const items = data; 
+    const users = data.users;
 
-    console.log(items.users[0].name); 
+    console.log(users); 
+    //your code goes here
 }
 
 useFetchedData();
@@ -44,12 +45,12 @@ useFetchedData();
 //     container.appendChild(div);
 // });
 
-// // Add click event listener to all buttons
-// document.addEventListener('click', function(event) {
-//     if (event.target.classList.contains('remove-btn')) {
-//         console.log(`Name added: ${event.target.getAttribute('data-name')}`);
+// Add click event listener to all buttons
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('remove-btn')) {
+        console.log(`Name added: ${event.target.getAttribute('data-name')}`);
         
-//         // Remove the entire card element
-//         event.target.closest('.card').remove();
-//     }
-// });
+        // Remove the entire card element
+        event.target.closest('.card').remove();
+    }
+});
