@@ -141,3 +141,11 @@ def get_users_from_db(is_admin = 0):
     return result
 
 
+def get_sub_projects_from_db(email: str):
+    manager_projects = run_query('SELECT * FROM projects WHERE manager = %s', (email,))
+    
+    return manager_projects
+
+
+
+
