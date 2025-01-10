@@ -98,3 +98,13 @@ async def get_project(user: CurrentUser):
     return {
         'projects': projects
     }
+
+
+@app.get('/get-users')
+async def get_users():
+    users = get_users_from_db()
+    return {
+        'users': users
+    }
+
+
