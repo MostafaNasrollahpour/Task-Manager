@@ -26,8 +26,11 @@ function checkInputs() {
     return true;
 }
 
+function save_current(email){
+    localStorage.setItem('currentUser', email);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
     
     document.getElementById('sign_in_form').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -40,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 work_history: document.getElementById('history').value,
                 password: document.getElementById('pass').value,
             };
-            console.log(JSON.stringify(formData));
             
             async function sendData(data) {
                 try {
@@ -51,13 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         },
                         body: JSON.stringify(data)
                     });
-            
+
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
             
                     const result = await response.json();
-                    console.log('Success:', result);
                     return result;
                 } catch (error) {
                     console.error('Error:', error);
@@ -68,12 +69,13 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const result = await sendData(formData);
                 if(result.is_succes == 'true'){
-                    if(result.is_admin == 'true'){
+                    save_current(formData.email);
+                    if (result.is_admin == 'true') {
                         window.location.replace('admin_home.html')
-                    }else{
+                    } else {
                         window.location.replace('user_home.html')
                     }
-                }else{
+                } else {
                     alert(result.detail)
                 }
             } catch (error) {
