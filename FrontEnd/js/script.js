@@ -34,14 +34,45 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (checkInputs()) {
             const formData = {
-                username: document.getElementById('name').value,
+                name: document.getElementById('name').value,
                 email: document.getElementById('email').value.toLowerCase(),
                 skills: document.getElementById('skills').value,
-                history: document.getElementById('history').value,
-                password: document.getElementById('pass').value
+                work_history: document.getElementById('history').value,
+                password: document.getElementById('pass').value,
             };
-            console.log(JSON.stringify(formData))
-        }
+            console.log(JSON.stringify(formData));
+            
+            async function sendData(data) {
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/signin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    });
+            
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+            
+                    const result = await response.json();
+                    console.log('Success:', result);
+                    return result;
+                } catch (error) {
+                    console.error('Error:', error);
+                    throw error;
+                }
+            }
 
+            try {
+                const result = await sendData(formData);
+                console.log(result); 
+                // here you can write your code
+            } catch (error) {
+                console.error('Error:', error);
+            }
+            
+        }
     });
 });

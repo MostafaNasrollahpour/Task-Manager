@@ -42,7 +42,6 @@ async function sendData(data) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
     
     document.getElementById('sign_up_form').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -62,5 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+    
 });
 
