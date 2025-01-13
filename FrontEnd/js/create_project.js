@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (checkInputs()) {
-            document.getElementById('submit_btn').style.display = 'none'
+            
             const formData = {
                 name: document.getElementById('project_name').value.toLowerCase(),
                 start_date: document.getElementById('start_date').value,
@@ -63,6 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const result = await sendData(formData);
                 console.log(result);
                 // you can write your code here
+
+                if(result.is_succes === 'true'){
+                    document.getElementById('submit_btn').style.display = 'none'
+                    alert('Project added successfully.')
+                    window.location.replace('admin_home.html')
+                }else{
+                    alert(result.detail)
+                }
             } catch (error) {
                 console.error('Error:', error);
             }
