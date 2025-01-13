@@ -23,7 +23,7 @@ async function sendData(data) {
 async function main() {
     try {
         let currentUser = localStorage.getItem('currentUser');
-        currentUser = JSON.parse('{"email":"aryan"}');
+        currentUser = JSON.parse(currentUser);
 
         const result = await sendData(currentUser);
 
