@@ -5,7 +5,7 @@ async function sendData(data) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
         });
 
         if (!response.ok) {
@@ -20,52 +20,71 @@ async function sendData(data) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     async function main() {
         try {
-
+            // Retrieve current user from localStorage
             let currentUser = localStorage.getItem('currentUser');
             currentUser = JSON.parse(currentUser);
-    
+
+            // Send data to the server
             const result = await sendData(currentUser);
-    
+
+            // Get the projects from the result
             const projects = result.projects;
-            
+
+            // Get the container element
             const container = document.getElementById('container');
 
-            console.log(projects);
 
-            projects.forEach(item => {
+            // Create and append project cards to the container
+            projects.forEach((project) => {
                 const div = document.createElement('div');
                 div.className = 'card';
                 div.innerHTML = `
-                <div class="card-content">
-                    <h5>${item.name}</h5>
-                    <form id="myForm-${item.name}">
-                        <select class="form-select" name="${item.name}" required>
-                            <option value="">Select a percentage</option>
-                            <option value="0">0%</option>
-                            <option value="25">25%</option>
-                            <option value="50">50%</option>
-                            <option value="75">75%</option>
-                            <option value="100">100%</option>
-                    </select>
-                        <div class="d-flex justify-content-center sub">
-                            <button type="submit" class="btn">Submit</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="card-content">
+                        <h5>Name: ${project.name}</h5>
+                        <h5>Manager: ${project.manager}</h5>
+                        <h5>Start Date: ${project.start_date}</h5>
+                        <h5>End Date: ${project.end_date}</h5>
+                        <h5>Description: ${project.description}</h5>
+                        <h5>Priority: ${project.priority}</h5>
+                        <form id="myForm-${project.id}">
+                            <select class="form-select" name="${project.id}" required>
+                                <option value="">Select a percentage</option>
+                                <option value="0">0%</option>
+                                <option value="25">25%</option>
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                                <option value="100">100%</option>
+                            </select>
+                            <div class="d-flex justify-content-center sub">
+                                <button type="submit" class="btn">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 `;
                 container.appendChild(div);
+                console.log('Form appended:', div);
+            });
+
+            // Add submit event listeners to all forms
+            document.querySelectorAll('.card').forEach((card) => {
+                const form = card.querySelector('form');
+                if (form) {
+                    form.addEventListener('submit', handleSubmit);
+                    console.log('Event listener added to form:', form); // Debugging: Check if listeners are added
+                }
             });
         } catch (error) {
             console.error('Error:', error);
         }
     }
 
+    // Call the main function
     main();
 
-
+    // Add styles dynamically
     const style = document.createElement('style');
     style.textContent = `
         .card {
@@ -78,29 +97,27 @@ document.addEventListener('DOMContentLoaded', function() {
             background-color: #f0f0f0;
             padding: 10px;
         }
-        `;
-        document.head.appendChild(style);
+    `;
+    document.head.appendChild(style);
 
     // Function to handle form submission
     function handleSubmit(event) {
-        event.preventDefault();
-      // Get all select elements within the form
-        const selects = Array.from(event.target.elements).filter(el => el.name);
-      // Collect selected values
-        const selectedValues = selects.map(select => ({
-        name: select.name,
-        value: select.value
-        }));
+        event.preventDefault(); // Prevent the form from refreshing the page
 
-      // Log the selected values to console
-        console.log('Selected values:', JSON.stringify(selectedValues, null, 2));
-        window.location.replace('status_reports.html')
+        // Get the select element within the form
+        const select = event.target.querySelector('.form-select');
+
+        // Get the selected value
+        const selectedValue = select.value;
+
+        // Log the selected value to console
+        console.log('Selected value:', selectedValue);
+
+        // Optionally, log the project name
+        const projectName = select.name;
+        console.log('Project id:', projectName);
+
+        // Redirect to the status reports page
+        // window.location.replace('status_reports.html');
     }
-
-    // Add submit event listeners to all forms
-    document.querySelectorAll('.card').forEach(card => {
-        card.querySelector('form')?.addEventListener('submit', handleSubmit);
-    });
-
-
 });
