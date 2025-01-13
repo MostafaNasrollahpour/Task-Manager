@@ -18,32 +18,31 @@ async function useFetchedData() {
 
     console.log(users); 
     //your code goes here
+
+
+    users.forEach(user => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        
+        // Create the card content
+        const cardContent = `
+            <div>
+                <h5 class="for-admin">Name: ${user.name}</h5>
+                <h5 class="for-admin">Email: ${user.email}</h5>
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="remove-btn btn btn-success" style="border:none;" data-name="${user.email}">Add</button>
+                </div>
+            </div>
+        `;
+        
+        div.innerHTML = cardContent;
+        
+        container.appendChild(div);
+    });
+
 }
 
 useFetchedData();
-
-
-
-
-
-// items.forEach(item => {
-//     const div = document.createElement('div');
-//     div.className = 'card';
-    
-//     // Create the card content
-//     const cardContent = `
-//         <div>
-//             <h5 class="for-admin">${item}</h5>
-//             <div class="d-flex justify-content-end">
-//                 <button type="button" class="remove-btn btn btn-success" style="border:none;" data-name="${item}">Add</button>
-//             </div>
-//         </div>
-//     `;
-    
-//     div.innerHTML = cardContent;
-    
-//     container.appendChild(div);
-// });
 
 // Add click event listener to all buttons
 document.addEventListener('click', function(event) {
