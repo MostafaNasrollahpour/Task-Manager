@@ -20,6 +20,18 @@ async function sendData(data) {
     }
 }
 
+function get_priority(priority){
+    if (priority == 1){
+        return "whenever you can"
+    }else if(priority == 2){
+        return "Normal"
+    }else if(priority == 3){
+        return "Necessary"
+    }else if(priority == 4){
+        return "Very necessary"
+    }
+}
+
 async function main() {
     try {
         let currentUser = localStorage.getItem('currentUser');
@@ -40,7 +52,7 @@ async function main() {
                     <h3>Start Date: ${project.start_date}</h3>
                     <h3>End Date: ${project.end_date}</h3>
                     <h3>Description: ${project.description}</h3>
-                    <h3>Priority: ${project.priority}</h3>
+                    <h3>Priority: ${get_priority(project.priority)}</h3>
                 </div>
             `;
             container.appendChild(div);
