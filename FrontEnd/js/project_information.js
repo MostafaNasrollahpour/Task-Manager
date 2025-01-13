@@ -34,7 +34,13 @@ async function main() {
             div.className = 'card';
             div.innerHTML = `
                 <div class="card-content">
-                    <h3>${project.name}</h3>
+                    <h3>Project Name: ${project.name}</h3>
+                    <h3>Manager: ${project.manager}</h3>
+                    <h3>Receiver: ${project.worker}</h3>
+                    <h3>Start Date: ${project.start_date}</h3>
+                    <h3>End Date: ${project.end_date}</h3>
+                    <h3>Description: ${project.description}</h3>
+                    <h3>Priority: ${project.priority}</h3>
                 </div>
             `;
             container.appendChild(div);
