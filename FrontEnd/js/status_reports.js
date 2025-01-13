@@ -34,14 +34,13 @@ async function main() {
             div.className = 'card';
             div.innerHTML = `
                 <div class="card-content">
-                    <h3>${project.name}</h3>
+                    <h3>Project Name: ${project.name}</h3>
+                    <h3>Status: ${project.status}%</h3>
                 </div>
             `;
             container.appendChild(div);
         });
         
-
-
     } catch (error) {
         console.error('Error:', error);
     }
