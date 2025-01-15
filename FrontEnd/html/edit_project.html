@@ -17,85 +17,78 @@
                 <div>
                     <form id="create-project-form">
                         <div class="card h-100 for-card" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Project name :</p>
-                                    <p id="demo-name" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_project_name.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="project_name" class="form-label" style="font-size: large;">Project name :</label>
+                            </div>
+                            <div>
+                                <input type="text" id="project_name" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
 
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Start date :</p>
-                                    <p id="demo-start-date" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_start_date.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="start_date" class="form-label" style="font-size: large;">Start date :</label>
+                            </div>
+                            <div>
+                                <input type="date" id="start_date" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
 
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">End date :</p>
-                                    <p id="demo-end-date" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_end_date.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="end_date" class="form-label" style="font-size: large;">End date :</label>
+                            </div>
+                            <div>
+                                <input type="date" id="end_date" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
 
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Description :</p>
-                                    <p id="demo-description" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button id="name-btn" type="button" class="btn btn-warning" onclick="window.location.replace('edit_description.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="description" class="form-label" style="font-size: large;">Description :</label>
+                            </div>
+                            <div>
+                                <input type="text" id="description" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Project manager :</p>
-                                    <p id="demo-manager" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_manager.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="manager" class="form-label" style="font-size: large;">Project manager :</label>
+                            </div>
+                            <div>
+                                <input type="text" id="manager" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Project receiver :</p>
-                                    <p id="demo-receiver" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_receiver.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="receiver" class="form-label" style="font-size: large;">Project receiver:</label>
+                            </div>
+                            <div>
+                                <input type="text" id="receiver" class="form-control w-100 in" style="border: 2px solid rgb(29, 30, 70);">
                             </div>
                         </div>
+
                         <div class="card h-100 for-card mt-3" style="border: none;">
-                            <div class="inner-card">
-                                <div class="d-flex">
-                                    <p class="for-admin" style="font-size: large;">Priority :</p>
-                                    <p id="demo-priority" class="for-admin"></p>
-                                </div>
-                                <div class="d-flex justify-content-end remove-btn">
-                                    <button type="button" class="btn btn-warning" onclick="window.location.replace('edit_priority.html')">Edit</button>
-                                </div>
+                            <div>
+                                <label for="priority" class="form-label" style="font-size: large;">Set priority :</label>
+                            </div>
+                            <div id="for-selection">
+                                <select id="priority" class="form-select" style="border: 2px solid rgb(29, 30, 70) ;" required>
+                                    <option value="">set a priority</option>
+                                    <option value="4">Very necessary</option>
+                                    <option value="3">Necessary</option>
+                                    <option value="2">Normal</option>
+                                    <option value="1">whenever you can</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center">
+                            <div id="submit_btn" class="card h-100 for-card mt-3 for-button w-50"  style="border: 2px solid rgb(29, 30, 70)">
+                                <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn w-100" style="border: none; ">Change</button>
+                            </div>
+                        </div>
+
                         
                     </form>
                 </div>
