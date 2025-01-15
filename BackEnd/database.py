@@ -216,5 +216,3 @@ def delete_project(id: int):
             cursor.close()
             conn.close()
 
-
-print(delete_project(10))
