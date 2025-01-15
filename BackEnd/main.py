@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # import section about my defind
 from schemas.users import UserSignIn, UserSignUp, CurrentUser
-from schemas.projects import ProjectCreated
+from schemas.projects import ProjectCreated, ProjectSelected
 from schemas.response import *
 from database import *
 
@@ -132,3 +132,9 @@ async def add_admin(user: CurrentUser):
     return UnExpected
 
 
+@app.post('/get-one-project')
+async def get_one_project(project: ProjectSelected):
+    project = get_one_project_from_db(project.id)[0]
+    return{
+        'project': project
+    }
