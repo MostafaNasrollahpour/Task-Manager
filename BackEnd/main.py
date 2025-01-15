@@ -122,3 +122,11 @@ async def get_my_projects(user: CurrentUser):
     return {
         'projects': projects
     }
+
+
+@app.post('/add-admin')
+async def add_admin(user: CurrentUser):
+    result = add_admin_to_db(user.email)
+    if result:
+        return OK
+    return UnExpected

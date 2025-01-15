@@ -153,8 +153,6 @@ def get_my_projects_from_db(email: str):
     return worker_projects
 
 
-
-
 def add_admin_to_db(email: str):
     try:
         conn = mysql.connector.connect(
@@ -178,8 +176,10 @@ def add_admin_to_db(email: str):
         return True
     except mysql.connector.Error as error:
         print(f"Error updating record: {error}")
+        return False
     finally:
         if conn.is_connected():
             cursor.close()
             conn.close()
-            return False
+
+
