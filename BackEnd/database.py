@@ -155,7 +155,7 @@ def get_my_projects_from_db(email: str):
 
 
 
-def add_admin(email: str):
+def add_admin_to_db(email: str):
     try:
         conn = mysql.connector.connect(
             host="localhost",
@@ -175,14 +175,11 @@ def add_admin(email: str):
         cursor.execute(sql_query, value)
 
         conn.commit()
-
+        return True
     except mysql.connector.Error as error:
         print(f"Error updating record: {error}")
-
     finally:
         if conn.is_connected():
             cursor.close()
             conn.close()
-
-
-add_admin("mahtabbodaghi@gmail.com")
+            return False
