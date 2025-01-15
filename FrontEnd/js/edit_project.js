@@ -1,6 +1,6 @@
-async function sendData(data) {
+async function sendData(data, url) {
     try {
-        const response = await fetch('http://127.0.0.1:8000/get-one-project', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,7 +19,6 @@ async function sendData(data) {
         throw error;
     }
 }
-
 
 function checkInputs() {
     const inputs = document.querySelectorAll('.in');
@@ -42,28 +41,40 @@ function checkInputs() {
     return true;
 }
 
+let tempStatus, tempId, tempPriority;
+
 async function main() {
     try {
         let projectSelected = localStorage.getItem('projectId');
         projectSelected = JSON.parse(projectSelected);
 
-        const result = await sendData(projectSelected);
+        const result = await sendData(projectSelected, 'http://127.0.0.1:8000/get-one-project');
 
         const project = result.project;
         console.log(project)
 
         project_name =  document.getElementById('project_name')
         project_name.value = project['name']
+
         start_date = document.getElementById('start_date')
         start_date.value = project['start_date']
+
         end_date = document.getElementById('end_date')
         end_date.value = project['end_date']
+
         description = document.getElementById('description')
         description.value = project['description']
+
         manager = document.getElementById('manager')
-        receiver.value = project['worker']
-        receiver =  document.getElementById('receiver')
         manager.value = project['manager']
+
+        receiver =  document.getElementById('receiver')
+        receiver.value = project['worker']
+
+        tempStatus = project['status']
+        tempId = project['id']
+        tempPriority = project['priority']
+
         switch(project['priority']){
             case 1:
                 document.getElementById('for-selection').innerHTML = `
@@ -113,35 +124,39 @@ async function main() {
         console.error('Error:', error);
     }
 }
+
 main()
 
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script is running');
-    
+
     document.getElementById('create-project-form').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         if (checkInputs()) {
             document.getElementById('submit_btn').style.display = 'none'
             const formData = {
-                project_name: document.getElementById('project_name').value,
+                name: document.getElementById('project_name').value,
                 start_date: document.getElementById('start_date').value,
+                manager: document.getElementById('manager').value.toLowerCase(),
                 end_date: document.getElementById('end_date').value,
                 description: document.getElementById('description').value,
-                manager: document.getElementById('manager').value.toLowerCase(),
-                receiver: document.getElementById('receiver').value.toLowerCase(),
-                priority: document.getElementById('priority').value
+                status: tempStatus,
+                worker: document.getElementById('receiver').value.toLowerCase(),
+                priority: tempPriority,
+                id: tempId
             };
-            console.log(JSON.stringify(formData))
+            console.log(formData)
             //update your code
+            try {
+                const result = await sendData(formData, 'http://127.0.0.1:8000/edit-project');
+                if(result.is_succes == 'true'){
+                    alert('success')
+                } else {
+                    alert(result.detail)
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
         }
 
     });

@@ -36,7 +36,13 @@ async function main() {
             // Create the card content
             const cardContent = `
                 <div>
-                    <h5 class="for-admin">${project.name}</h5>
+                    <h5 class="for-admin">Project name: ${project.name}</h5>
+                    <h5 class="for-admin">Manager: ${project.manager}</h5>
+                    <h5 class="for-admin">Receiver: ${project.receiver}</h5>
+                    <h5 class="for-admin">Start date: ${project.start_date}</h5>
+                    <h5 class="for-admin">End date: ${project.end_date}</h5>
+                    <h5 class="for-admin">Description: ${project.descriptoin}</h5>
+                    <h5 class="for-admin">Priority: ${project.priority}</h5>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="remove-btn btn btn-warning" style="border:none;" project_edit="${project.id}">Edit</button>
                     </div>
@@ -59,10 +65,10 @@ main();
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('remove-btn')) {
         
-        let selectedId = Number(event.target.getAttribute('project_edit'))
+        let selectedId = event.target.getAttribute('project_edit')
 
         const projectSelected = {
-            id: selectedId
+            id: parseInt(selectedId)
         }
         let id = JSON.stringify(projectSelected);
         localStorage.setItem("projectId", id);
