@@ -187,3 +187,34 @@ def get_one_project_from_db(id: int):
     result = run_query("SELECT * FROM projects WHERE id = %s", (id,))
     return result
 
+
+def delete_project(id: int):
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            database="data_structure",
+            user="root",
+            password="Mosi_5180204453"
+        )
+
+        cursor = conn.cursor()
+
+        sql_query =""" DELETE FROM projects
+                    WHERE id = %s"""
+
+        value = (id,)
+
+        cursor.execute(sql_query, value)
+
+        conn.commit()
+        return True
+    except mysql.connector.Error as error:
+        print(f"Error updating record: {error}")
+        return False
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
+print(delete_project(10))
