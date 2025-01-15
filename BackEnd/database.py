@@ -152,3 +152,37 @@ def get_my_projects_from_db(email: str):
     
     return worker_projects
 
+
+
+
+def add_admin(email: str):
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            database="data_structure",
+            user="root",
+            password="Mosi_5180204453"
+        )
+
+        cursor = conn.cursor()
+
+        sql_query = """UPDATE users 
+                        SET is_admin = 1
+                        WHERE email = %s"""
+
+        value = (email,)
+
+        cursor.execute(sql_query, value)
+
+        conn.commit()
+
+    except mysql.connector.Error as error:
+        print(f"Error updating record: {error}")
+
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
+
+
+add_admin("mahtabbodaghi@gmail.com")
