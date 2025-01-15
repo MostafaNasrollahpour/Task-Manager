@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # import section about my defind
 from schemas.users import UserSignIn, UserSignUp, CurrentUser
-from schemas.projects import ProjectCreated, ProjectSelected
+from schemas.projects import ProjectCreated, ProjectSelected, ProjectEdited
 from schemas.response import *
 from database import *
 
@@ -138,3 +138,22 @@ async def get_one_project(project: ProjectSelected):
     return{
         'project': project
     }
+
+
+@app.post('/edit-project')
+async def edit_project(project: ProjectEdited):
+    values: tuple = (
+        project.name,
+        project.start_date,
+        project.manager, 
+        project.end_date,
+        project.description,
+        project.status,
+        project.worker, 
+        project.priority
+    )
+    delete_project(project.id)
+    result = insert_projects(values)
+    if result:
+        return OK
+    return UnExpected
