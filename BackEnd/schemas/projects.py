@@ -13,3 +13,7 @@ class ProjectCreated(BaseModel):
 
 class ProjectSelected(BaseModel):
     id: int
+
+
+class ProjectEdited(ProjectCreated):
+    id: int
