@@ -16,10 +16,6 @@ async function useFetchedData() {
 
     const users = data.users;
 
-    console.log(users); 
-    //your code goes here
-
-
     users.forEach(user => {
         const div = document.createElement('div');
         div.className = 'card';
@@ -44,12 +40,45 @@ async function useFetchedData() {
 
 useFetchedData();
 
+async function sendData(data) {
+    try {
+        const response = await fetch('http://127.0.0.1:8000/add-admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+}
+
 // Add click event listener to all buttons
-document.addEventListener('click', function(event) {
-    if (event.target.classList.contains('remove-btn')) {
-        console.log(`Name added: ${event.target.getAttribute('data-name')}`);
-        
-        // Remove the entire card element
+document.addEventListener('click', async function(event) {
+    if (event.target.classList.contains('remove-btn')) { 
+        const data = {
+            email: event.target.getAttribute('data-name'),
+        };
+
+        try {
+            const result = await sendData(data);
+            if(result.is_succes == 'true'){    
+                console.log('added')
+            }else{
+                alert(result.detail)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
         event.target.closest('.card').remove();
     }
 });
