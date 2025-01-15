@@ -183,3 +183,7 @@ def add_admin_to_db(email: str):
             conn.close()
 
 
+def get_one_project_from_db(id: int):
+    result = run_query("SELECT * FROM projects WHERE id = %s", (id,))
+    return result
+
