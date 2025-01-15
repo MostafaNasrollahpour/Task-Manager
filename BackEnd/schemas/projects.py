@@ -8,4 +8,8 @@ class ProjectCreated(BaseModel):
     description: str 
     status: int = 0
     worker: str
-    priority: int 
+    priority: int
+    
+
+class ProjectSelected(BaseModel):
+    id: int
