@@ -252,7 +252,7 @@ def update_project_status(project_id, new_status):
             connection.close()
 
 
-def delete_admin(email):
+def delete_admin_from_db(email):
     try:
         conn = mysql.connector.connect(
             host="localhost",
