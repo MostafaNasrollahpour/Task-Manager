@@ -17,3 +17,8 @@ class ProjectSelected(BaseModel):
 
 class ProjectEdited(ProjectCreated):
     id: int
+
+
+class ProjectUpdate(BaseModel):
+    id: int
+    status: int
