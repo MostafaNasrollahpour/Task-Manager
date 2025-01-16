@@ -250,3 +250,32 @@ def update_project_status(project_id, new_status):
         if connection.is_connected():
             cursor.close()
             connection.close()
+
+
+def delete_admin(email):
+    try:
+        conn = mysql.connector.connect(
+            host="localhost",
+            database="data_structure",
+            user="root",
+            password="Mosi_5180204453"
+        )
+
+        cursor = conn.cursor()
+
+        sql_query =""" DELETE FROM users
+                    WHERE email = %s"""
+
+        value = (email,)
+
+        cursor.execute(sql_query, value)
+
+        conn.commit()
+        return True
+    except mysql.connector.Error as error:
+        print(f"Error updating record: {error}")
+        return False
+    finally:
+        if conn.is_connected():
+            cursor.close()
+            conn.close()
