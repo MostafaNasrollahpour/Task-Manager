@@ -182,3 +182,10 @@ async def get_admins():
         'admins': admins
     }
 
+
+@app.post('/delete-admin')
+async def delete_admin(admin: CurrentUser):
+    result = delete_admin_from_db(admin.email)
+    if result:
+        return OK
+    return UnExpected
