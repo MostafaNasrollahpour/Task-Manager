@@ -35,6 +35,7 @@ async function main() {
             div.innerHTML = `
                 <div class="card-content">
                     <h3>Project Name: ${project.name}</h3>
+                    <h3>Receiver: ${project.worker}</h3>
                     <h3>Status: ${project.status}%</h3>
                 </div>
             `;
