@@ -174,3 +174,11 @@ async def delete_project_by_id(project: ProjectSelected):
         return OK
     return UnExpected
 
+
+@app.get('/get-admins')
+async def get_admins():
+    admins = get_users_from_db(is_admin=1)
+    return {
+        'admins': admins
+    }
+
