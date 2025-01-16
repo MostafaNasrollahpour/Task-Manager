@@ -38,10 +38,10 @@ async function main() {
                 <div>
                     <h5 class="for-admin">Project name: ${project.name}</h5>
                     <h5 class="for-admin">Manager: ${project.manager}</h5>
-                    <h5 class="for-admin">Receiver: ${project.receiver}</h5>
+                    <h5 class="for-admin">Receiver: ${project.worker}</h5>
                     <h5 class="for-admin">Start date: ${project.start_date}</h5>
                     <h5 class="for-admin">End date: ${project.end_date}</h5>
-                    <h5 class="for-admin">Description: ${project.descriptoin}</h5>
+                    <h5 class="for-admin">Description: ${project.description}</h5>
                     <h5 class="for-admin">Priority: ${project.priority}</h5>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="remove-btn btn btn-warning" style="border:none;" project_edit="${project.id}">Edit</button>
