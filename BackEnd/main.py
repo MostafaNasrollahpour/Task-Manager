@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # import section about my defind
 from schemas.users import UserSignIn, UserSignUp, CurrentUser
-from schemas.projects import ProjectCreated, ProjectSelected, ProjectEdited
+from schemas.projects import ProjectCreated, ProjectSelected, ProjectEdited, ProjectUpdate
 from schemas.response import *
 from database import *
 
@@ -158,4 +158,11 @@ async def edit_project(project: ProjectEdited):
         return OK
     return UnExpected
 
+
+@app.post('/update-status')
+async def update_status(project: ProjectUpdate):
+    result = update_project_status(project_id=project.id, new_status=project.status)
+    if result:
+        return OK
+    return UnExpected
 
