@@ -1,6 +1,6 @@
-async function sendData(data) {
+async function sendData(data, url) {
     try {
-        const response = await fetch('http://127.0.0.1:8000/get-my-users-projects', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ async function main() {
         let currentUser = localStorage.getItem('currentUser');
         currentUser = JSON.parse(currentUser);
 
-        const result = await sendData(currentUser);
+        const result = await sendData(currentUser, 'http://127.0.0.1:8000/get-my-users-projects');
 
         const projects = result.projects;
         console.log(projects)
@@ -61,13 +61,24 @@ async function main() {
 main();
 
 
-
 // Add click event listener to all buttons
-document.addEventListener('click', function(event) {
+document.addEventListener('click', async function(event) {
     if (event.target.classList.contains('remove-btn')) {
-        console.log(`Project removed: ${event.target.getAttribute('data-name')}`);
-        
-        // Remove the entire card element
+        const projectSelected = {
+            id: parseInt(event.target.getAttribute('data-name'))
+        }
+
+        try {
+            const result = await sendData(projectSelected, 'http://127.0.0.1:8000/delete-project');
+            if(result.is_succes == 'true'){
+                alert('project deleted')
+            } else {
+                alert(result.detail)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
         event.target.closest('.card').remove();
     }
 });

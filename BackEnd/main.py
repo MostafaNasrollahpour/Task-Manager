@@ -173,3 +173,4 @@ async def delete_project_by_id(project: ProjectSelected):
     if result:
         return OK
     return UnExpected
+
