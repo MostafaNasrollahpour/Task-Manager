@@ -166,3 +166,10 @@ async def update_status(project: ProjectUpdate):
         return OK
     return UnExpected
 
+
+@app.post('/delete-project')
+async def delete_project_by_id(project: ProjectSelected):
+    result = delete_project(id=project.id)
+    if result:
+        return OK
+    return UnExpected
