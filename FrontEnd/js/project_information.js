@@ -53,6 +53,7 @@ async function main() {
                     <h3>End Date: ${project.end_date}</h3>
                     <h3>Description: ${project.description}</h3>
                     <h3>Priority: ${get_priority(project.priority)}</h3>
+                    <h3>Status: ${project.status}%</h3>
                 </div>
             `;
             container.appendChild(div);

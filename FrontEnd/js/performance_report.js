@@ -1,6 +1,6 @@
-async function sendData(data) {
+async function sendData(data, url) {
     try {
-        const response = await fetch('http://127.0.0.1:8000/get-my-projects', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentUser = JSON.parse(currentUser);
 
             // Send data to the server
-            const result = await sendData(currentUser);
+            const result = await sendData(currentUser, 'http://127.0.0.1:8000/get-my-projects');
 
             // Get the projects from the result
             const projects = result.projects;
@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 `;
                 container.appendChild(div);
-                console.log('Form appended:', div);
             });
 
             // Add submit event listeners to all forms
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const form = card.querySelector('form');
                 if (form) {
                     form.addEventListener('submit', handleSubmit);
-                    console.log('Event listener added to form:', form); // Debugging: Check if listeners are added
                 }
             });
         } catch (error) {
@@ -101,23 +99,35 @@ document.addEventListener('DOMContentLoaded', function () {
     document.head.appendChild(style);
 
     // Function to handle form submission
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault(); // Prevent the form from refreshing the page
 
         // Get the select element within the form
         const select = event.target.querySelector('.form-select');
+        
+        // Optionally, log the project name
+        const projectId = select.name;
 
         // Get the selected value
         const selectedValue = select.value;
 
-        // Log the selected value to console
-        console.log('Selected value:', selectedValue);
+        const formData = {
+            id: parseInt(projectId),
+            status: parseInt(selectedValue)
+        }
 
-        // Optionally, log the project name
-        const projectName = select.name;
-        console.log('Project id:', projectName);
+        try {
+            const result = await sendData(formData, 'http://127.0.0.1:8000/update-status');
+            if(result.is_succes == 'true'){
+                alert('project updated')
+            } else {
+                alert(result.detail)
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
 
         // Redirect to the status reports page
-        // window.location.replace('status_reports.html');
+        window.location.replace('project_information.html');
     }
 });
