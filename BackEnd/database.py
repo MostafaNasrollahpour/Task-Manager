@@ -216,3 +216,37 @@ def delete_project(id: int):
             cursor.close()
             conn.close()
 
+
+def update_project_status(project_id, new_status):
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",
+            database="data_structure",
+            user="root",
+            password="Mosi_5180204453"
+        )
+        
+        # Create a cursor object
+        cursor = connection.cursor()
+        
+        # Prepare the UPDATE statement
+        update_query = """
+            UPDATE projects
+            SET status = %s
+            WHERE id = %s
+        """
+        
+        # Execute the UPDATE query
+        cursor.execute(update_query, (new_status, project_id))
+        
+        # Commit the changes
+        connection.commit()
+        
+        return True
+    except mysql.connector.Error as error:
+        print(f"Error: {error}")
+        return False
+    finally:
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
