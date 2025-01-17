@@ -284,10 +284,10 @@ def delete_admin_from_db(email):
 def get_projects_for_excel(email):
     try:
         # Query for projects where the user is a worker
-        worker_projects = run_query('SELECT name, start_date, manager, end_date, description, status, worker, priority FROM projects WHERE worker = %s', (email,))
+        worker_projects = run_query('SELECT name, manager, worker, start_date, end_date, priority, description, status FROM projects WHERE worker = %s', (email,))
         
         # Query for projects where the user is a manager
-        manager_projects = run_query('SELECT name, start_date, manager, end_date, description, status, worker, priority FROM projects WHERE manager = %s', (email,))
+        manager_projects = run_query('SELECT name, manager, worker, start_date, end_date, priority, description, status FROM projects WHERE manager = %s', (email,))
         
         # Combine the results
         projects = worker_projects + manager_projects
@@ -295,3 +295,6 @@ def get_projects_for_excel(email):
         return projects
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+print(get_projects_for_excel('aryan'))
