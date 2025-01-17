@@ -279,3 +279,19 @@ def delete_admin_from_db(email):
         if conn.is_connected():
             cursor.close()
             conn.close()
+
+
+def get_projects_for_excel(email):
+    try:
+        # Query for projects where the user is a worker
+        worker_projects = run_query('SELECT name, start_date, manager, end_date, description, status, worker, priority FROM projects WHERE worker = %s', (email,))
+        
+        # Query for projects where the user is a manager
+        manager_projects = run_query('SELECT name, start_date, manager, end_date, description, status, worker, priority FROM projects WHERE manager = %s', (email,))
+        
+        # Combine the results
+        projects = worker_projects + manager_projects
+        
+        return projects
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
