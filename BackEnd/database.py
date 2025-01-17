@@ -296,5 +296,3 @@ def get_projects_for_excel(email):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-
-print(get_projects_for_excel('aryan'))
