@@ -1,12 +1,14 @@
 # import section about library
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 # import section about my defind
 from schemas.users import UserSignIn, UserSignUp, CurrentUser
 from schemas.projects import ProjectCreated, ProjectSelected, ProjectEdited, ProjectUpdate
 from schemas.response import *
 from database import *
+from excel_creator import *
 
 
 
@@ -189,3 +191,16 @@ async def delete_admin(admin: CurrentUser):
     if result:
         return OK
     return UnExpected
+
+
+@app.post('/get-excel')
+async def get_excel(user: CurrentUser):
+    file_path = "excel/" + user.email + ".xlsx"
+    excel_handler = CreateProjectsData(file_path=file_path)
+    
+    projects = get_projects_for_excel(user.email)
+    for i in range(len(projects)):
+        excel_handler.add_project(projects[i])
+    
+    # Return the file as a response
+    return FileResponse(file_path, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', filename=file_path)
