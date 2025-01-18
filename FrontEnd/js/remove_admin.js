@@ -70,19 +70,27 @@ document.addEventListener('click', async function(event) {
             email: event.target.getAttribute('data-name'),
         };
 
-        try {
-            const result = await sendData(data);
-            if(result.is_succes == 'true'){    
-                alert('admin deleted')
-            }else{
-                alert(result.detail)
+        let currentUser = localStorage.getItem('currentUser');
+        currentUser = JSON.parse(currentUser);
+        userEmail = currentUser.email;
+
+        if(data.email === userEmail){
+            alert('You can\'t remove yourself.')
+        }else{
+            try {
+                const result = await sendData(data);
+                if(result.is_succes == 'true'){    
+                    // alert('admin deleted')
+                }else{
+                    alert(result.detail)
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } catch (error) {
-            console.error('Error:', error);
+    
+            // Remove the entire card element
+            event.target.closest('.card').remove();
         }
 
-        // Remove the entire card element
-        event.target.closest('.card').remove();
-        
     }
 });
