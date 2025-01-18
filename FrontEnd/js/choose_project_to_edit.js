@@ -20,6 +20,19 @@ async function sendData(data) {
     }
 }
 
+
+function get_priority(priority){
+    if (priority == 1){
+        return "whenever you can"
+    }else if(priority == 2){
+        return "Normal"
+    }else if(priority == 3){
+        return "Necessary"
+    }else if(priority == 4){
+        return "Very necessary"
+    }
+}
+
 async function main() {
     try {
         let currentUser = localStorage.getItem('currentUser');
@@ -42,7 +55,7 @@ async function main() {
                     <h5 class="for-admin">Start date: ${project.start_date}</h5>
                     <h5 class="for-admin">End date: ${project.end_date}</h5>
                     <h5 class="for-admin">Description: ${project.description}</h5>
-                    <h5 class="for-admin">Priority: ${project.priority}</h5>
+                    <h5 class="for-admin">Priority: ${get_priority(project.priority)}</h5>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="remove-btn btn btn-warning" style="border:none;" project_edit="${project.id}">Edit</button>
                     </div>
@@ -72,6 +85,6 @@ document.addEventListener('click', function(event) {
         }
         let id = JSON.stringify(projectSelected);
         localStorage.setItem("projectId", id);
-        window.open('edit_project.html')
+        window.location.replace('edit_project.html')
     }
 });

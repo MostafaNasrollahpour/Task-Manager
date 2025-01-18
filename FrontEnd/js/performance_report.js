@@ -20,6 +20,19 @@ async function sendData(data, url) {
     }
 }
 
+
+function get_priority(priority){
+    if (priority == 1){
+        return "whenever you can"
+    }else if(priority == 2){
+        return "Normal"
+    }else if(priority == 3){
+        return "Necessary"
+    }else if(priority == 4){
+        return "Very necessary"
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     async function main() {
         try {
@@ -48,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <h5>Start Date: ${project.start_date}</h5>
                         <h5>End Date: ${project.end_date}</h5>
                         <h5>Description: ${project.description}</h5>
-                        <h5>Priority: ${project.priority}</h5>
+                        <h5>Priority: ${get_priority(project.priority)}</h5>
                         <form id="myForm-${project.id}">
                             <select class="form-select" name="${project.id}" required>
                                 <option value="">Select a percentage</option>

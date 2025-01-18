@@ -20,6 +20,19 @@ async function sendData(data, url) {
     }
 }
 
+
+function get_priority(priority){
+    if (priority == 1){
+        return "whenever you can"
+    }else if(priority == 2){
+        return "Normal"
+    }else if(priority == 3){
+        return "Necessary"
+    }else if(priority == 4){
+        return "Very necessary"
+    }
+}
+
 async function main() {
     try {
         let currentUser = localStorage.getItem('currentUser');
@@ -41,7 +54,7 @@ async function main() {
                     <h5 class="for-admin">Start Date: ${project.start_date}</h5>
                     <h5 class="for-admin">End Date: ${project.end_date}</h5>
                     <h5 class="for-admin">Description: ${project.description}</h5>
-                    <h5 class="for-admin">Priority: ${project.priority}</h5>
+                    <h5 class="for-admin">Priority: ${get_priority(project.priority)}</h5>
                     <div class="d-flex justify-content-end">
                         <button type="button" class="remove-btn btn btn-danger" style="border:none;" data-name="${project.id}">Remove</button>
                     </div>
@@ -71,7 +84,7 @@ document.addEventListener('click', async function(event) {
         try {
             const result = await sendData(projectSelected, 'http://127.0.0.1:8000/delete-project');
             if(result.is_succes == 'true'){
-                alert('project deleted')
+                // alert('project deleted')
             } else {
                 alert(result.detail)
             }
