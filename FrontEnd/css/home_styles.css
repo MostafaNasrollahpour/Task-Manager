@@ -57,3 +57,10 @@ a {
     background-color: white;
     border-radius: 5px;
 }
+.d-button:hover{
+    color: green;
+}
+.d-button{
+    font-family: cursive;
+    border: none;
+}
