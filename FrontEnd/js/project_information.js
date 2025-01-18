@@ -1,3 +1,21 @@
+// Define the Stack class
+class Stack {
+    constructor(array) {
+        this.items = array;
+    }
+    pop() {
+        if (this.isEmpty()) {
+        throw new Error('Stack is empty');
+    }
+        return this.items.pop();
+    }
+
+    isEmpty() {
+        return this.items.length === 0;
+    }
+}
+
+
 async function sendData(data) {
     try {
         const response = await fetch('http://127.0.0.1:8000/get-project', {
@@ -41,7 +59,17 @@ async function main() {
 
         const projects = result.projects;
         
-        projects.forEach(project => {
+
+        projects.sort((a, b) => {
+            const priorityA = typeof a.priority === 'number' ? a.priority : 0;
+            const priorityB = typeof b.priority === 'number' ? b.priority : 0;
+            return priorityA - priorityB;
+        });
+
+        let stack = new Stack(projects)
+
+        while(!stack.isEmpty()){
+            const project = stack.pop()
             const div = document.createElement('div');
             div.className = 'card';
             div.innerHTML = `
@@ -57,7 +85,7 @@ async function main() {
                 </div>
             `;
             container.appendChild(div);
-        });
+        }
         
 
 
