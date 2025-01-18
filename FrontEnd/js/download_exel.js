@@ -9,11 +9,26 @@ async function sendData(data) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error("error");
         }
 
-        const result = await response.json();
-        return result;
+        // Handle the response as a Blob (for file downloads)
+        const blob = await response.blob(); // Get the response as a Blob
+        const url = window.URL.createObjectURL(blob); // Create a URL for the Blob
+        
+        const btn  = document.getElementById('d-button')
+        // Create a temporary link to trigger the download
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'file.xlsx'; // Set the filename for the download
+        btn.appendChild(a);
+        a.click(); // Trigger the download
+        // a.remove()
+
+        // Clean up
+        window.URL.revokeObjectURL(url); // Release the object URL
+        btn.removeChild(a); // Remove the temporary link
+
     } catch (error) {
         console.error('Error:', error);
         throw error;
@@ -24,16 +39,14 @@ async function main() {
     try {
         let currentUser = localStorage.getItem('currentUser');
         currentUser = JSON.parse(currentUser);
-        
 
-        // const result = await sendData(currentUser); 
-        // console.log(result)
+        // Send the currentUser data to the backend and trigger the download
+        await sendData(currentUser);
 
     } catch (error) {
         console.error('Error:', error);
     }
+    
 }
-
-
-document.getElementById('d-button').addEventListener('click', main);
+document.getElementById('d-button').addEventListener('click', main, { once: true });
 

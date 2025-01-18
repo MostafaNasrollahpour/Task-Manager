@@ -263,8 +263,11 @@ def delete_admin_from_db(email):
 
         cursor = conn.cursor()
 
-        sql_query =""" DELETE FROM users
-                    WHERE email = %s"""
+        sql_query = """
+            UPDATE users
+            SET is_admin = 0
+            WHERE email = %s
+        """
 
         value = (email,)
 
